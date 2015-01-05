@@ -1,0 +1,19 @@
+//SCSS
+	main.scss
+	//base
+		//_reset
+		//_typography
+	//components
+		//_buttons
+		//_navigation
+	//helpers
+		//_functions
+		//_mixins
+		//_variables
+	//layout
+		//_footer
+		//_grid
+	//pages
+		//_home
+	//sections
+		//_reusable-section

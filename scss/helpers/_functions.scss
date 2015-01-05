@@ -1,0 +1,4 @@
+// Media Queries
+
+$tablet: new-breakpoint(max-width 767px 4); // New context - 4 columns
+$mobile: new-breakpoint(max-width 480px 2); // New context - 2 columns

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rugby Quiz</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:700' 
+</head>
+<body>
+	<div class="background"></div>
+
+	<section class="heading-container">
+		<h1>How well do you know your rugby?</h1>
+	</section>
+
+	<section class="question-container">
+		<div class="question-wrapper">
+			<div class="dropcap">
+				<h2>Q1.</h2>
+			</div>
+			<div class="question-text">
+				<p>In what country was Rugby Union first played?</p>
+			</div>
+		</div>
+	</section>
+	
+	<section class="answer-container">
+		<div class="answer-text">
+			<div class="answer-form">
+				<form id="answers">
+					<div class="answer-left">
+						<input type="radio" id="South-Africa" value="South Africa" class="radio" name="answers">
+						<label for="South-Africa" class="radio-label">South Africa</label>
+					</div>
+					<div class="answer-right">
+						<input type="radio" id="Australia" value="Australia" class="radio" name="answers">
+						<label for="Australia" class="radio-label">Australia</label>
+					</div>
+					<div class="answer-left">
+						<input type="radio" id="New-Zealand" value="New Zealand" class="radio" name="answers">
+						<label for="New-Zealand" class="radio-label">New Zealand</label>
+					</div>
+					<div class="answer-right">
+						<input type="radio" id="England" value="England" class="radio" name="answers">
+						<label for="England" class="radio-label">England</label>
+					</div>
+				</form>
+			</div>
+			<a class="btn-blue" href="#">Submit</a>
+		</div>
+	</section>
+
+	<section class="score-container">
+		<div class="score-text">
+			<h3>Score</h3>
+			<ul>
+				<li class="score">0</li>
+			</ul>
+			<ul>
+				<li class="score">3</li>
+			</ul>
+
+		</div>		
+	</section>
+
+	<script>
+		document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+	</script>
+</body>
+</html>
