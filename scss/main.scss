@@ -13,14 +13,14 @@
 @import "base/normalize";
 @import "base/typography";
 
+// Components
+
+@import "components/buttons";
+
 // Pages
 
 @import "pages/index";
 @import "pages/question-1";
-
-// Components
-
-@import "components/buttons";
 
 // Set Bourbon Auto-Prefix to false, this is handled by Gulp Autoprefix task
 
