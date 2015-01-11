@@ -80,6 +80,28 @@
 	}
 }
 
+.answer-form-incorrect {
+	margin-right: 60px;
+	margin-left: 60px;
+	margin-bottom: 20px;
+	padding: 15px 0;
+	border-radius: 3px;
+	background-color: #e74c3c;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: em(14);
+	font-weight: 700;
+	display: none;
+
+	@include media($tablet) {
+		margin: 0 20px;
+	}
+
+	.form-success-text {
+		margin: 0;
+	}
+}
+
 .btn-submit {
 	display: inline-block;
 }
