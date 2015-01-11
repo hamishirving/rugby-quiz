@@ -110,6 +110,10 @@
 	display: none;
 }
 
+.btn-again {
+	display: none;
+}
+
 .answer-left, 
 .answer-right {
 	@include span-columns(6);

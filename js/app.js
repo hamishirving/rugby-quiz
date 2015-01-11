@@ -1,61 +1,102 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
+
+    // Questions
+	var questions = [{
+		question: "In what country was Rugby Union first played?",
+		answers: ["South Africa", "Australia", "New Zealand", "England"],
+		correctAnswer: "England"
+	},
+	{
+		question: "What team is currently ranked number 1 in the IRB World rankings?",
+		answers: ["Argentina", "Australia", "New Zealand", "South Africa"],
+		correctAnswer: "New Zealand"
+	},
+	{
+		question: "In what year will the next Rugby World Cup be played?",
+		answers: ["2015", "2016", "2017", "2018"],
+		correctAnswer: "2015"
+	},
+	{
+		question: "In what country was Rugby Union first played?",
+		answers: ["South Africa", "Australia", "New Zealand", "England"],
+		correctAnswer: "England"
+	},
+	{
+		question: "In what country was Rugby Union first played?",
+		answers: ["South Africa", "Australia", "New Zealand", "England"],
+		correctAnswer: "England"
+	}]
 
     // Global variables
     var score = 0;
-    var currentQuestion = 1;
+    var currentQuestion = 0;
+	var correct;
+	var numberOfQuestions = questions.length;
+	console.log("The number of questions is " + numberOfQuestions);
+	resetPage();
 
-    // Populate quesion and answers
-    setQuestionNumber();
-    setQuestion();
-    setAnswers();
-
+	// On submit, evaluate answer
     $('.btn-submit').on('click', function() {
     	evaluateAnswer();
     })
 
-    $('btn-next').on('click', function() {
-    	currentQuestion++;
-    	console.log('Current question is ' + currentQuestion);
-    	// setQuestion();
-
+    // Click next, reset page
+    $('.btn-next').on('click', function() {
+    	resetPage();
     })
 
+    // Reset page and populate question and answers
+    function resetPage() {
+    	currentQuestion++;
+		console.log('Current question is ' + currentQuestion);
+    	if (currentQuestion <= numberOfQuestions) {
+	    	setQuestionNumber();
+		    setQuestion();
+		    setAnswers();
+			$('.answer-form').show();
+			$('.answer-form-incorrect').hide();
+			$('.answer-form-success').hide();
+			$('.btn-submit').show();
+			$('.btn-next').hide();	
+    	} else {
+			$('.answer-form-incorrect').hide();
+			$('.answer-form-success').hide();
+			$('.btn-submit').hide();
+			$('.btn-next').hide();
+    		quizComplete();
+    	}
+	}
+
     function setQuestionNumber() {
+    	console.log('Current question in setQuestionNumber is ' + currentQuestion);
     	$('.dropcap').find('h2').text('Q' + currentQuestion + '.');
-    	// $(this).text(currentQuestion);
     }
 
 	// Set question on page
 	function setQuestion() {
-		// currentQuestion++;
-		// console.log('Current question number is ' + currentQuestion);
-
-		// Get question from list of questions
-		// var bob = questions[0].correctAnswer;
-		// console.log('This question is ' + questions[0].correctAnswer);
-
-		$('.question-text').find('p').text('new question');
-
+		// Set current question from questions array at index [currentQuestion - 1]
+		$('.question-text').find('p').text(questions[(currentQuestion - 1)].question);
+		console.log('Current question is ' + currentQuestion);
 	}
 
 	// Set answers on page
 	function setAnswers() {
+		// Get the answers for the current question
+		var currentAnswers = questions[(currentQuestion - 1)].answers;
+		console.log("Current answers are " + currentAnswers);
 
-		// Get the value of the input
+		// ** TODO **
+		// Set value of radio's to answers from array
+		// Set label text to answers from array
+		for (var i = 0; i <= 3; i++) {
+			var answerList = currentAnswers[i];
+			$('#answers').find('label').text(answerList);
+			console.log("Answer " + i + " is " + answerList);
+		}
 
-		// Get the value from each input in answers
-
-		$('#answers').find("input[type='radio']").each(function() {
-			var inputValue = [$(this).val()];
-			console.log(inputValue);
-			// Set the value as the label for the answer
-			// $('label').text(inputValue);
-			$('label').each(function(index) {
-				$(this).text(inputValue);
-			})
-		})
-
+		$('#answers').each(function(){
+		    $('label').val(answerList);
+		});
 	}
 
 	function evaluateAnswer() {
@@ -66,6 +107,7 @@ $( document ).ready(function() {
 		console.log("Correct answer is " + correct);
 		// if result is equal to correctAnswer
 		if (selectedAnswer == correct) {
+			score++;
 			isCorrect();
 		} else {
 			isIncorrect();
@@ -74,67 +116,46 @@ $( document ).ready(function() {
 
 	function isCorrect() {
 		updateScore();
-		// hide questions
 		$('.answer-form').hide();
-		// show correct message
 		$('.answer-form-success').show();
-		// hide submit button
-		$('.btn-submit').hide();
-		// show next button		
+		$('.form-success-text').text(correct + " is correct"); // ** TODO **
+		$('.btn-submit').hide();	
 		$('.btn-next').css("display","inline-block");
 	}
 
 	function isIncorrect() {
-		// hide questions
 		$('.answer-form').hide();
-		// show correct message
 		$('.answer-form-incorrect').show();
-		// hide submit button
 		$('.btn-submit').hide();
-		// show next button		
 		$('.btn-next').css("display","inline-block");
-		// show incorrect message
 	}
 
 	function updateScore() {
 		// increment scrore by 1
-		score++;
 		console.log('Score is ' + score)
 		// set score
 		$('.score-2').text(score);
 	}
 
-	// Questions
+	function quizComplete() {
+		console.log('Quiz complete');
+		$('.dropcap').hide();
+		$('.question-text').css({"text-align":"center", "margin-left":"8%"});
+		$('.question-text').text("You got " + score + " out of " + numberOfQuestions + ", would you like to try again?");
+		$('.btn-again').show();
+		$('.btn-again').on('click', function() {
+			startOver();
+		})
+	}
 
-	var questions = [{
-		questionNo: 1,
-		question: "In what country was Rugby Union first played?",
-		answers: ["South Africa", "Australia", "New Zealand", "England"],
-		correctAnswer: "England"
-	},
-	{
-		questionNo: 2,
-		question: "What team is currently ranked number 1 in the IRB World rankings?",
-		answers: ["Argentina", "Australia", "New Zealand", "South Africa"],
-		correctAnswer: "New Zealand"
-	},
-	{
-		questionNo: 3,
-		question: "In what year will the next Rugby World Cup be played?",
-		answers: ["2015", "2016", "2017", "2018"],
-		correctAnswer: "2015"
-	},
-	{
-		questionNo: 4,
-		question: "In what country was Rugby Union first played?",
-		answers: ["South Africa", "Australia", "New Zealand", "England"],
-		correctAnswer: "England"
-	},
-	{
-		questionNo: 5,
-		question: "In what country was Rugby Union first played?",
-		answers: ["South Africa", "Australia", "New Zealand", "England"],
-		correctAnswer: "England"
-	}]
-
+	function startOver() {
+		$('.btn-again').hide();
+		$('.question-text').empty();
+		// Reset global variables
+	    score = 0;
+	    currentQuestion = 0;
+	    // Start again
+		updateScore();
+	    resetPage();
+	}
 });
