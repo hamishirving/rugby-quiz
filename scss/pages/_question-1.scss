@@ -46,10 +46,19 @@
 		padding: 0;
 	}
 
+	@include media($mobile) {
+		@include span-columns(2);
+	}
+
 	p {
 		max-width: 30em;
 		margin: 0 auto;
 	}
+}
+
+#again-text {
+	@include span-columns(12);
+	text-align: center;
 }
 
 .answer-form {
@@ -112,6 +121,7 @@
 
 .btn-again {
 	display: none;
+	margin: 10px 0;
 }
 
 .answer-left, 

@@ -47,7 +47,7 @@ $( document ).ready(function() {
 
     // Reset page and populate question and answers
     function resetPage() {
-    	currentQuestion++;
+        currentQuestion++;
     	if (currentQuestion <= numberOfQuestions) {
 	    	setQuestionNumber();
 		    setQuestion();
@@ -67,6 +67,7 @@ $( document ).ready(function() {
 	}
 
     function setQuestionNumber() {
+    	// $('.dropcap').show();
     	$('.dropcap').find('h2').text('Q' + currentQuestion + '.');
     }
 
@@ -101,7 +102,7 @@ $( document ).ready(function() {
 		// Correct answer taken from questions array at index [currentQuestion -1]
 		var correct = questions[(currentQuestion - 1)].correctAnswer;
 		console.log("Correct answer is " + correct);
-		// Ff selected answer is equal to correct answer
+		// If selected answer is equal to correct answer
 		if (selectedAnswer == correct) {
 			score++;
 			isCorrect();
@@ -114,7 +115,6 @@ $( document ).ready(function() {
 		updateScore();
 		$('.answer-form').hide();
 		$('.answer-form-success').show();
-		$('.form-success-text').text(correct + " is correct"); // ** TODO **
 		$('.btn-submit').hide();	
 		$('.btn-next').css("display","inline-block");
 	}
@@ -128,17 +128,18 @@ $( document ).ready(function() {
 
 	function updateScore() {
 		// increment scrore by 1
-		console.log('Score is ' + score)
+		console.log('Score is ' + score);
 		// set score
 		$('.score-2').text(score);
+
 	}
 
 	function quizComplete() {
 		console.log('Quiz complete');
 		$('.dropcap').hide();
-		$('.question-text').css({"text-align":"center", "margin-left":"8%"});
+		$('.question-text').attr({"id":"again-text"});
 		$('.question-text').text("You got " + score + " out of " + numberOfQuestions + ", would you like to try again?");
-		$('.btn-again').show();
+		$('.btn-again').css("display", "inline-block");
 		$('.btn-again').on('click', function() {
 			startOver();
 		})
