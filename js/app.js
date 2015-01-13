@@ -48,7 +48,6 @@ $( document ).ready(function() {
     // Reset page and populate question and answers
     function resetPage() {
     	currentQuestion++;
-		console.log('Current question is ' + currentQuestion);
     	if (currentQuestion <= numberOfQuestions) {
 	    	setQuestionNumber();
 		    setQuestion();
@@ -68,7 +67,6 @@ $( document ).ready(function() {
 	}
 
     function setQuestionNumber() {
-    	console.log('Current question in setQuestionNumber is ' + currentQuestion);
     	$('.dropcap').find('h2').text('Q' + currentQuestion + '.');
     }
 
@@ -76,36 +74,34 @@ $( document ).ready(function() {
 	function setQuestion() {
 		// Set current question from questions array at index [currentQuestion - 1]
 		$('.question-text').find('p').text(questions[(currentQuestion - 1)].question);
-		console.log('Current question is ' + currentQuestion);
 	}
 
 	// Set answers on page
 	function setAnswers() {
 		// Get the answers for the current question
 		var currentAnswers = questions[(currentQuestion - 1)].answers;
-		console.log("Current answers are " + currentAnswers);
+		console.log('Current answer list is ' + currentAnswers);
 
-		// ** TODO **
-		// Set value of radio's to answers from array
-		// Set label text to answers from array
-		for (var i = 0; i <= 3; i++) {
-			var answerList = currentAnswers[i];
-			$('#answers').find('label').text(answerList);
-			console.log("Answer " + i + " is " + answerList);
+		// TODO - Set value ( <input value=""> ) of each input to answer from answers object
+		for (var i = 0; i <= (numberOfQuestions - 2); i++) {
+			$('input').val(currentAnswers);
+			console.log("Value " + i + " is " + currentAnswers[i]);
 		}
 
-		$('#answers').each(function(){
-		    $('label').val(answerList);
-		});
+		// TODO - Set the label of each answer to answer from answers object
+		for (var i = 0; i <= (numberOfQuestions - 2); i++) {
+			$('#answers label').text(currentAnswers[i]);
+			console.log("Answer " + i + " is " + currentAnswers[i]);
+		}
 	}
 
 	function evaluateAnswer() {
 		var selectedAnswer = $("input[type='radio']:checked").val();
 		console.log("Checked answer is " + selectedAnswer);
-		// Correct answer taken from Questions array at index [currentQuestion -1]
+		// Correct answer taken from questions array at index [currentQuestion -1]
 		var correct = questions[(currentQuestion - 1)].correctAnswer;
 		console.log("Correct answer is " + correct);
-		// if result is equal to correctAnswer
+		// Ff selected answer is equal to correct answer
 		if (selectedAnswer == correct) {
 			score++;
 			isCorrect();
